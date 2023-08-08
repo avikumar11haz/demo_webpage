@@ -16,6 +16,10 @@ app.get("/hobbies", function (req, res) {
   res.send("palying cricket, and dancing");
 });
 
+app.get("/meet", function (req, res) {
+  res.send("your meeting is scheduled on Thrusday");
+});
+
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
