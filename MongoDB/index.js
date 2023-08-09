@@ -12,23 +12,38 @@ const courseSchema = new mongoose.Schema({
   creator: String,
   publishedDate: { type: Date, default: Date.now },
   isPublished: Boolean,
+  rating: Number,
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: "JavaScript",
-    creator: "haz",
+    name: "RectJs",
+    creator: "haz33",
     isPublished: true,
+    rating: 4.3,
   });
 
   const result = await course.save();
   console.log(result);
 }
 
+// ratings 0 to 5
+
+// createCourse();
+
+// eq (equal)
+//gt(greater than)
+// gte(greater than and equal to)
+// lt
+// lte
+
+// in => {$in : [3, 4.2]}
+// not in
+
 async function getCourses() {
-  const courses = await Course.find({ creator: "haz" })
+  const courses = await Course.find({ rating: { $gte: 4.1 } })
     .select({ name: 1, publishedDate: 1 })
     .sort({ name: 1 });
   console.log(courses);
