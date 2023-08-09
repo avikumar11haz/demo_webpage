@@ -71,4 +71,14 @@ async function updateCourse(id) {
 
   console.log(updateCourse);
 }
-updateCourse("64d388f14fa7ee6011c6af3e");
+//updateCourse("64d388f14fa7ee6011c6af3e");
+
+//deleting
+
+async function deleteCourse(id) {
+  let course = await Course.findByIdAndDelete(id);
+
+  console.log(course);
+}
+
+deleteCourse("64d388f14fa7ee6011c6af3e");
