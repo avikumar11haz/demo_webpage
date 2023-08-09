@@ -56,3 +56,19 @@ async function getCourses() {
 }
 
 getCourses();
+
+//update a document
+
+async function updateCourse(id) {
+  let course = await Course.findById(id);
+
+  if (!course) return;
+
+  course.name = "Ruby";
+  course.creator = "Steve";
+
+  const updateCourse = await course.save();
+
+  console.log(updateCourse);
+}
+updateCourse("64d388f14fa7ee6011c6af3e");
