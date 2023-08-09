@@ -8,21 +8,32 @@ mongoose
 //Schema
 
 const courseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, minlength: 5, maxlength: 200 },
+  category: {
+    type: String,
+    required: true,
+    enum: ["DSA", "Web", "Mobile", "Data Science"],
+  },
   creator: { type: String, required: true },
   publishedDate: { type: Date, default: Date.now },
   isPublished: { type: Boolean, required: true },
-  rating: Number,
+  rating: {
+    type: Number,
+    required: function () {
+      return this.isPublished;
+    },
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: "c++",
-    // creator: "haz33",
-    // isPublished: true,
-    // rating: 4.3,
+    name: "MongoDB",
+    category: "Web",
+    creator: "haz33",
+    isPublished: true,
+    rating: 4.5,
   });
 
   try {
