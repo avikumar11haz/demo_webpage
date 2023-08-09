@@ -33,6 +33,8 @@ async function createCourse() {
 
 // createCourse();
 
+// comparision operators
+
 // eq (equal)
 //gt(greater than)
 // gte(greater than and equal to)
@@ -42,10 +44,14 @@ async function createCourse() {
 // in => {$in : [3, 4.2]}
 // not in
 
+// Logical operators
+//or
+// and
+
 async function getCourses() {
-  const courses = await Course.find({ rating: { $gte: 4.1 } })
+  const courses = await Course.find({ rating: { $in: [4.5, 4, 4.1, 4.3] } })
     .select({ name: 1, publishedDate: 1 })
-    .sort({ name: 1 });
+    .or([{ creator: "haz" }, { rating: 4.5 }]);
   console.log(courses);
 }
 
