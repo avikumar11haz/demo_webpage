@@ -8,10 +8,10 @@ mongoose
 //Schema
 
 const courseSchema = new mongoose.Schema({
-  name: String,
-  creator: String,
+  name: { type: String, required: true },
+  creator: { type: String, required: true },
   publishedDate: { type: Date, default: Date.now },
-  isPublished: Boolean,
+  isPublished: { type: Boolean, required: true },
   rating: Number,
 });
 
@@ -19,14 +19,19 @@ const Course = mongoose.model("Course", courseSchema);
 
 async function createCourse() {
   const course = new Course({
-    name: "RectJs",
-    creator: "haz33",
-    isPublished: true,
-    rating: 4.3,
+    name: "c++",
+    // creator: "haz33",
+    // isPublished: true,
+    // rating: 4.3,
   });
 
-  const result = await course.save();
-  console.log(result);
+  try {
+    await course.validate();
+    // const result = await course.save();
+    // console.log(result);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
 // ratings 0 to 5
@@ -55,7 +60,7 @@ async function getCourses() {
   console.log(courses);
 }
 
-getCourses();
+//getCourses();
 
 //update a document
 
@@ -81,4 +86,4 @@ async function deleteCourse(id) {
   console.log(course);
 }
 
-deleteCourse("64d388f14fa7ee6011c6af3e");
+// deleteCourse("64d388f14fa7ee6011c6af3e");
